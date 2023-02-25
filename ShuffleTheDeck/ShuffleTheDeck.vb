@@ -25,7 +25,7 @@ Module ShuffleTheDeck
 
             Select Case userInput
                 Case "S"
-
+                    Shuffle()
                 Case "Q"
                     quitFlag = True
                 Case Else
@@ -33,7 +33,9 @@ Module ShuffleTheDeck
                         PickACard()
                         Console.WriteLine(cardDrawn)
                     Else
+                        Console.WriteLine()
                         Console.WriteLine("No more cards left in the deck to draw.")
+                        Console.WriteLine()
                     End If
             End Select
         Loop
@@ -92,5 +94,20 @@ Module ShuffleTheDeck
         Else
             PickACard()
         End If
+    End Sub
+
+    Sub Shuffle()
+        cardsLeft = 52
+        displayHand = ""
+
+        For face As Integer = 0 To 12
+            For suit As Integer = 0 To 3
+                deckTracker(face, suit) = False
+            Next
+        Next
+
+        Console.WriteLine()
+        Console.WriteLine("Your hand has been returned to the deck and shuffled.")
+        Console.WriteLine()
     End Sub
 End Module
