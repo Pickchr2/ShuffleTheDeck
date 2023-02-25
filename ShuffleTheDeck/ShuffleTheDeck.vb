@@ -11,7 +11,7 @@ Option Compare Text
 Imports System
 Module ShuffleTheDeck
     Dim deckTracker(13, 4) As Boolean
-    Dim cardsLeft As Integer
+    Dim cardsLeft As Integer = 52
     Dim displayHand As String
     Dim cardDrawn As String
 
@@ -29,7 +29,12 @@ Module ShuffleTheDeck
                 Case "Q"
                     quitFlag = True
                 Case Else
-                    PickACard()
+                    If cardsLeft <> 0 Then
+                        PickACard()
+                        Console.WriteLine(cardDrawn)
+                    Else
+                        Console.WriteLine("No more cards left in the deck to draw.")
+                    End If
             End Select
         Loop
     End Sub
@@ -83,6 +88,7 @@ Module ShuffleTheDeck
             End If
 
             deckTracker(randomFace, randomSuit) = True
+            cardsLeft -= 1
         Else
             PickACard()
         End If
