@@ -14,6 +14,7 @@ Module ShuffleTheDeck
     Dim cardsLeft As Integer = 52
     Dim displayHand As String
     Dim cardDrawn As String
+    Dim rowLength As Integer
 
     Sub Main(args As String())
         Dim userInput As String
@@ -29,12 +30,13 @@ Module ShuffleTheDeck
                 Case "Q"
                     quitFlag = True
                 Case Else
-                    If cardsLeft <> 0 Then
+                    If cardsLeft > 0 Then
                         PickACard()
-                        Console.WriteLine(cardDrawn)
+                        DisplayCards()
                     Else
-                        Console.WriteLine()
-                        Console.WriteLine("No more cards left in the deck to draw.")
+                        cardsLeft = -1
+                        DisplayCards()
+                        Console.WriteLine("There are no more cards left in the deck. Please shuffle to continue drawing.")
                         Console.WriteLine()
                     End If
             End Select
@@ -98,6 +100,7 @@ Module ShuffleTheDeck
 
     Sub Shuffle()
         cardsLeft = 52
+        rowLength = 0
         displayHand = ""
 
         For face As Integer = 0 To 12
@@ -105,9 +108,27 @@ Module ShuffleTheDeck
                 deckTracker(face, suit) = False
             Next
         Next
-
-        Console.WriteLine()
+        Console.Clear()
         Console.WriteLine("Your hand has been returned to the deck and shuffled.")
+        Console.WriteLine()
+    End Sub
+
+    Sub DisplayCards()
+        Console.Clear()
+        If cardsLeft >= 0 Then
+            If rowLength > 0 And rowLength < 13 Then
+                displayHand &= ", "
+            ElseIf rowLength >= 13 Then
+                displayHand &= vbCrLf
+                rowLength = 0
+            End If
+            displayHand &= cardDrawn.PadLeft(3)
+            rowLength += 1
+        End If
+
+        Console.WriteLine("Your hand contains the following cards:")
+        Console.WriteLine()
+        Console.WriteLine(displayHand)
         Console.WriteLine()
     End Sub
 End Module
