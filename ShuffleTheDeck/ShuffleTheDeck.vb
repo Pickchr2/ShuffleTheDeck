@@ -109,7 +109,7 @@ Module ShuffleTheDeck
             Next
         Next
         Console.Clear()
-        Console.WriteLine("Your hand has been returned to the deck and shuffled.")
+        Console.WriteLine("Any Cards in your hand have been returned to the deck and it has been shuffled.")
         Console.WriteLine()
     End Sub
 
